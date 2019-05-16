@@ -26,8 +26,6 @@ dependencies:
   firebase_auth:
   firebase_database:
   firebase_storage:
-  datetime_picker_formfield:
-  intl:
   url_launcher:
 
 dev_dependencies:

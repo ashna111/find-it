@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'home_page.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'home.dart';
 
 class AddInternship extends StatefulWidget {
   @override
@@ -20,36 +20,6 @@ class _AddInternshipState extends State<AddInternship> {
       duration = "",
       eligible = "";
 
-  bool validateandsave() {
-    final form = formKey.currentState;
-    if (form.validate()) {
-      form.save();
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  void validateandsubmit() {
-    if (validateandsave()) {
-      DatabaseReference ref = FirebaseDatabase.instance.reference();
-      var data = {
-        "company": company,
-        "position": position,
-        "stipend": stipend,
-        "eligibility": eligible,
-        "duration": duration,
-        "description": description,
-        "requirements": requirements,
-        "link": link,
-        "startDate": startDate
-      };
-      ref.child("posts").push().set(data);
-      Navigator.of(context).pushReplacement(new MaterialPageRoute(
-          builder: (BuildContext context) => new HomePage()));
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,6 +33,7 @@ class _AddInternshipState extends State<AddInternship> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 new Form(
+                  // form to enter internship details
                   key: formKey,
                   child: new Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -243,5 +214,35 @@ class _AddInternshipState extends State<AddInternship> {
             ),
           ),
         ));
+  }
+
+  bool validateandsave() {
+    final form = formKey.currentState;
+    if (form.validate()) {
+      form.save();
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  void validateandsubmit() {
+    if (validateandsave()) {
+      DatabaseReference ref = FirebaseDatabase.instance.reference();
+      var data = {
+        "company": company,
+        "position": position,
+        "stipend": stipend,
+        "eligibility": eligible,
+        "duration": duration,
+        "description": description,
+        "requirements": requirements,
+        "link": link,
+        "startDate": startDate
+      };
+      ref.child("posts").push().set(data); //add to firebase instance
+      Navigator.of(context).pushReplacement(new MaterialPageRoute(
+          builder: (BuildContext context) => new HomePage()));
+    }
   }
 }

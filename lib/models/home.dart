@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'add_new_internship.dart';
-import 'all_internships.dart';
+import 'form.dart';
+import 'internship.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -28,8 +28,8 @@ class _HomePageState extends State<HomePage>
     return Scaffold(
       body: new TabBarView(
         children: <Widget>[
-          new AllInternships(),
-          new AddInternship(),
+          new AllInternships(), //refers to internship.dart
+          new AddInternship(), //refers to form.dart
         ],
         controller: tabController,
       ),
